@@ -86,13 +86,10 @@ def get_mapping(table_a,table_b,treshold=0.5,n=2):
     for r,r_ in rt_cl:
         for i,i_ in im_cl:
             dc = dice_coefficient(r,i)
-            print([r_, i_, dc])
 
             if (dc >= treshold ) or (r_ in i_):
                 df = df.append(pd.Series([r_,i_,dc],index=["tab_a_entry","tab_b_entry","coeff"]),ignore_index=True)
-    # tresh = df.loc[df['coeff'] >= treshold];
-    #print(tresh)
-    print(df.to_csv())
+
     df = df.groupby(['tab_a_entry'], sort=True)['tab_a_entry','tab_b_entry','coeff'].max()
     return dict(zip(df["tab_b_entry"],df['tab_a_entry']))
 
@@ -162,7 +159,7 @@ def test_algo(tableA,tableB,to_csv=False):
 
 # In[14]:
 
-#test_ = test_algo(rt,im,True)
+test_ = test_algo(rt,im,True)
 
 
 # In[ ]:
@@ -178,7 +175,7 @@ print(what_is_missing_or_wrong(test_mapping))
 
 # In[219]:
 
-#test_.to_csv("test.csv")
+test_.to_csv("test.csv")
 
 
 # In[ ]:
